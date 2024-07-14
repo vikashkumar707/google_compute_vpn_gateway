@@ -29,6 +29,36 @@ jobs:
       - name: Setup git global config
         run: git config --global url."https://oauth2:${{secrets.VK_TOKEN}}@github.com".insteadOf https://github.com
 
+      # - name: Install Terrascan
+      #   run: |
+      #     curl --location https://github.com/accurics/terrascan/releases/download/v1.9.0/terrascan_1.9.0_Linux_x86_64.tar.gz --output terrascan.tar.gz
+      #     tar -xf terrascan.tar.gz terrascan
+      #     rm terrascan.tar.gz
+      #     sudo mv terrascan /usr/local/bin/
+
+      # - name: Run Terrascan Scan
+      #   run: terrascan scan -t gcp -i terraform    
+
+      - name: Install Prowler
+        run: |
+           pip install prowler
+           export PATH=$PATH:/home/$HOME/.local/bin/
+           prowler -v
+      - name: Save GCP Credentials to File
+        run: echo '${{ secrets.GCP_SC_KEY }}' > $HOME/gcp_credentials.json
+
+      - name: Run Prowler
+        # run: prowler gcp --credentials-file $HOME/gcp_credentials.json 
+        run: prowler gcp --services cloudsql --credentials-file $HOME/gcp_credentials.json --ignore-exit-code-3 --verbose --output-format csv --output-file prowler-output.csv
+        continue-on-error: true
+
+      - name: Upload Prowler Results
+        uses: actions/upload-artifact@v4
+        with:
+          # name: prowler-results
+          # path: /home/runner/work/ceq_tf_module_gcp_war_Postgresql_sample/ceq_tf_module_gcp_war_Postgresql_sample/output/compliance/
+          name: prowler-output
+          path: /home/runner/work/ceq_tf_module_gcp_war_Postgresql_sample/ceq_tf_module_gcp_war_Postgresql_sample/output/prowler-output.csv.csv
   
 
       # - name: Test the checkov
