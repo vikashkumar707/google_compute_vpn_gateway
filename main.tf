@@ -4,13 +4,13 @@ module "google_compute_vpn_gateway" {
   # description - (optional) is a type of string
   description = null
   # name - (required) is a type of string
-  name = null
+  name = var.name
   # network - (required) is a type of string
-  network = null
+  network = var.network
   # project - (optional) is a type of string
-  project = null
+  project = var.project
   # region - (optional) is a type of string
-  region = null
+  region = var.region
 
   timeouts = [{
     create = null
