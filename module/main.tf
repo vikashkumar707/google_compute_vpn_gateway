@@ -3,6 +3,27 @@ resource "google_compute_network" "vpc_network" {
   auto_create_subnetworks = true
 }
 
+resource "google_compute_firewall" "default" {
+  name    = "default-allow-internal"
+  network = google_compute_network.vpc_network.self_link
+
+  allow {
+    protocol = "icmp"
+  }
+
+  allow {
+    protocol = "tcp"
+    ports    = ["0-65535"]
+  }
+
+  allow {
+    protocol = "udp"
+    ports    = ["0-65535"]
+  }
+
+  source_ranges = ["10.0.0.0/8"]
+}
+
 resource "google_compute_vpn_gateway" "this" {
   # description - (optional) is a type of string
   description = var.description
