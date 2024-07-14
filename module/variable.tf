@@ -11,10 +11,6 @@ variable "subnet_name" {
 
 # OPTIONAL VARIABLES
 
-variable "project" {
-  type        = string
-  description = "Project ID"
-}
 
 variable "auto_create_value" {
   type        = bool
@@ -46,10 +42,6 @@ variable "ip_cidr_range" {
   description = "IP CIDR range"
 }
 
-variable "region" {
-  type        = string
-  description = "Region"
-}
 
 variable "timecreate" {
   type        = string
@@ -112,11 +104,6 @@ variable "description" {
 
 variable "name" {
   description = "(required) - Name of the resource. Provided by the client when the resource is\ncreated. The name must be 1-63 characters long, and comply with\nRFC1035.  Specifically, the name must be 1-63 characters long and\nmatch the regular expression '[a-z]([-a-z0-9]*[a-z0-9])?' which means\nthe first character must be a lowercase letter, and all following\ncharacters must be a dash, lowercase letter, or digit, except the last\ncharacter, which cannot be a dash."
-  type        = string
-}
-
-variable "network" {
-  description = "(required) - The network this VPN gateway is accepting traffic for."
   type        = string
 }
 
