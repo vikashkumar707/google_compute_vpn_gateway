@@ -48,8 +48,8 @@ jobs:
         run: echo '${{ secrets.GCP_SC_KEY }}' > $HOME/gcp_credentials.json
 
       - name: Run Prowler
-        run: prowler gcp --credentials-file $HOME/gcp_credentials.json 
-        # run: prowler gcp --services cloudsql --credentials-file $HOME/gcp_credentials.json --ignore-exit-code-3 --verbose --output-format csv --output-file prowler-output.csv
+        # run: prowler gcp --credentials-file $HOME/gcp_credentials.json 
+        run: prowler gcp --services networking --credentials-file $HOME/gcp_credentials.json --ignore-exit-code-3 --verbose --output-format csv --output-file prowler-output.csv
         continue-on-error: true
 
       - name: Upload Prowler Results
