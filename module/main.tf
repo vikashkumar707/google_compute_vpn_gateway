@@ -1,10 +1,12 @@
 resource "google_compute_network" "vpc_network" {
   name                    = var.network
+  project = var.project
   auto_create_subnetworks = true
 }
 
 resource "google_compute_firewall" "default" {
   name    = "default-allow-internal"
+  project = var.project
   network = google_compute_network.vpc_network.self_link
 
   allow {
