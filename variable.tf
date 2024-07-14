@@ -26,10 +26,6 @@ variable "region" {
   default     = null
 }
 
-variable "user_label" {
-  description = "A user-defined label for organizing resources"
-  type        = string
-}
 
 
 variable "timeouts" {
