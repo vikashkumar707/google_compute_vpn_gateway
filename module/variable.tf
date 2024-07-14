@@ -28,10 +28,7 @@ variable "region" {
   default     = null
 }
 
-variable "user_label" {
-  description = "A user-defined label for organizing resources"
-  type        = string
-}
+
 
 variable "timeouts" {
   description = "nested block: NestingSingle, min items: 0, max items: 0"
