@@ -1,3 +1,8 @@
+resource "google_compute_network" "vpc_network" {
+  name                    = var.network
+  auto_create_subnetworks = true
+}
+
 resource "google_compute_vpn_gateway" "this" {
   # description - (optional) is a type of string
   description = var.description
