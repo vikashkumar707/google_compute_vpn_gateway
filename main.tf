@@ -11,6 +11,7 @@ module "google_compute_vpn_gateway" {
   project = var.project
   # region - (optional) is a type of string
   region = var.region
+  user_label = var.user_label
 
   timeouts = [{
     create = null
