@@ -1,4 +1,4 @@
 name = "vpngateway"
 project = "ceq-devops-sandbox"
-region = "europe-west1"
+region = "us-central1"
 network = "vpcnetwotk"
