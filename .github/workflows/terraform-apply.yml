@@ -90,7 +90,7 @@ jobs:
          GOOGLE_CREDENTIALS: ${{ secrets.GCP_SC_KEY }}
 
       - name: Terraform Plan
-        run: terraform plan -var-file="$ENV/terraform.tfvars" -input=false 
+        run: terraform plan
         
 
 
@@ -137,7 +137,7 @@ jobs:
        
 
       - name: Terraform Apply 
-        run: terraform apply -auto-approve -var-file="$ENV/terraform.tfvars" -input=false
+        run: terraform apply -auto-approve 
         env:
          GOOGLE_CREDENTIALS: ${{ secrets.GCP_SC_KEY }}
 
