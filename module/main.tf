@@ -1,29 +1,38 @@
 resource "google_compute_network" "vpc_network" {
-  name                    = var.network
-  project = var.project
-  auto_create_subnetworks = true
+  project                 = var.project
+  name                    = var.vpc_name
+  auto_create_subnetworks = var.auto_create_value
+  mtu                     = var.mtu
+  description             = var.description
+  routing_mode            = var.routing_mode
+  delete_default_routes_on_create = var.delete_default_value
+
+timeouts {
+    create = var.timecreate   
+    delete = var.timedelete  
+    update = var.timeupdate   
+  }
 }
 
-resource "google_compute_firewall" "default" {
-  name    = "default-allow-internal"
-  project = var.project
-  network = google_compute_network.vpc_network.self_link
+resource "google_compute_subnetwork" "custom_subnet" {
+  project       = var.project
+  name          = var.subnet_name
+  ip_cidr_range = var.ip_cidr_range
+  region        = var.region
+  network       = google_compute_network.vpc_network.name
+  private_ip_google_access     = var.private_ip_google_access
+  private_ipv6_google_access   = var.private_ipv6_google_access
 
-  allow {
-    protocol = "icmp"
+  secondary_ip_range {
+    range_name    = var.range_name
+    ip_cidr_range = var.ip_cidr_range1
   }
 
-  allow {
-    protocol = "tcp"
-    ports    = ["0-65535"]
+  log_config {
+    aggregation_interval = var.aggregation_interval
+    flow_sampling        = var.flow_sampling
+    metadata             = var.metadata
   }
-
-  allow {
-    protocol = "udp"
-    ports    = ["0-65535"]
-  }
-
-  source_ranges = ["10.0.0.0/8"]
 }
 
 resource "google_compute_vpn_gateway" "this" {
