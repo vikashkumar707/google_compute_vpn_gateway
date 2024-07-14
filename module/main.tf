@@ -16,9 +16,9 @@ resource "google_compute_vpn_gateway" "this" {
   # region - (optional) is a type of string
   region = var.region
   depends_on = [google_compute_network.vpc_network]
-  labels = {
-    user_label = var.user_label
-  }
+
+  user_label = var.user_label
+  
 
   dynamic "timeouts" {
     for_each = var.timeouts
