@@ -1,15 +1,17 @@
 module "google_compute_vpn_gateway" {
   source =  "./module"
 
-  # description - (optional) is a type of string
+   # description - (optional) is a type of string
   description = null
   # name - (required) is a type of string
-  name = var.name
+  name = null
   # network - (required) is a type of string
-  network = var.network
+  network = null
   # project - (optional) is a type of string
-  project = var.project  
-  region                  = var.region
+  project = null
+  # region - (optional) is a type of string
+  region = null
+
   timeouts = [{
     create = null
     delete = null
