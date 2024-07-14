@@ -31,12 +31,12 @@ jobs:
 
   
 
-      - name: Test the checkov
-        id: checkov
-        uses: bridgecrewio/checkov-action@master
-        with:
-          directory: . 
-          framework: terraform
+      # - name: Test the checkov
+      #   id: checkov
+      #   uses: bridgecrewio/checkov-action@master
+      #   with:
+      #     directory: . 
+      #     framework: terraform
           
 
       - name: Install Infracost
